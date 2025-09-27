@@ -22,12 +22,14 @@ class BankingSystem{
               	 	break;
               	 case 5:Viewtranscations();
               	 	break;
-              	 case 6: System.out.println("Exiting..."); 
+                 case 6: deleteAccount();
+        break;
+              	 case 7: System.out.println("Exiting..."); 
               	 	break;
                 default: System.out.println("Invalid choice!");
               }
 
-		}while(choice!=6);
+		}while(choice!=7);
 	}
 	static void showMenu(){
 		System.out.println("\n--- Banking System ---");
@@ -36,7 +38,8 @@ class BankingSystem{
         System.out.println("3. Withdraw Money");
         System.out.println("4. View Account Details");
         System.out.println("5. View Transaction History");
-        System.out.println("6. Exit");
+        System.out.println("6. Delete an account");
+        System.out.println("7. Exit");
         System.out.print("Enter your choice: ");
 	}
 	static void createaccount(){
@@ -104,4 +107,17 @@ class BankingSystem{
         }
         if(!found) System.out.println("No transactions found for this account.");
 	}
+     static void deleteAccount() {
+    System.out.print("Enter Account Number to delete: ");
+    int accNo = sc.nextInt();
+    
+    Account acc = accounts.get(accNo);
+    if (acc != null) {
+        accounts.remove(accNo); // remove from HashMap
+        transactions.add(new Transaction(accNo, "Account Deleted", acc.getBalance()));
+        System.out.println("Account deleted successfully.");
+    } else {
+        System.out.println("Account not found!");
+    }
+}
 }
